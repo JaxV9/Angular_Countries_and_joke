@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Country } from '../../model/country';
 import { CountryService } from '../services/country.service';
 
+
 @Component({
   selector: 'app-countries-display',
   templateUrl: './countries-display.component.html',
@@ -17,7 +18,10 @@ export class CountriesDisplayComponent implements OnInit {
 
    private fetchCountries() {
     this.countryService.getCountries().subscribe((countries: Country[]) => {
-      this.countries = countries;
+      this.countries = countries.sort(
+        (a, b) => a.name.common.localeCompare(b.name.common)
+        );
+      
 
       console.log(this.countries);
     });
